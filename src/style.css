@@ -24,6 +24,9 @@ a:hover {
 
 body {
   margin: 0;
+  font-family: Arial, sans-serif:
+  background:linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white:
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -37,6 +40,8 @@ h1 {
 
 #app {
   max-width: 1280px;
+  text-align: center:
+  padding-top: 80px:
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -62,6 +67,15 @@ h1 {
 .read-the-docs {
   color: #888;
 }
+button {
+  background: white;
+  color: #4f46e5;
+  border: none;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
 button {
   border-radius: 8px;
@@ -72,8 +86,7 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
+  transition: border-color 0.25
 button:hover {
   border-color: #646cff;
 }
@@ -94,3 +107,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
