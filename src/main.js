@@ -11,6 +11,3 @@ document.getElementById('btn').onclick = () => {
   document.getElementById('msg').innerText =
     'Aplicación estática lista para CDN 🚀';
 };
-
-// Test comment
-// Test
