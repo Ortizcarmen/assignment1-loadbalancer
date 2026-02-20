@@ -31,6 +31,29 @@ Ejemplo:
 - Doppler
 - Husky + ESLint + Prettier
 
+### Aplicación funcionando
+![App](screenshots/app-screenshot.png)
+
+### AWS Elastic Beanstalk - Entorno
+![Elastic](screenshots/Elastic.png)
+
+### AWS Elastic Beanstalk - Dashboard
+![Dashboard](screenshots/Dashboard.png)
+
+### AWS Elastic Beanstalk - Configuración
+![Configuracion](screenshots/configuracion.png)
+
+### AWS Elastic Beanstalk - Ambiente web
+![Web Environment](screenshots/webenv.png)
+
+### Pipeline GitHub Actions
+![Pipeline](screenshots/github.png)
+
+### Secretos configurados
+![Secrets](screenshots/secrets.png)
+
+
+
 ##  Autora
 
 **Carmen Ortiz**  
