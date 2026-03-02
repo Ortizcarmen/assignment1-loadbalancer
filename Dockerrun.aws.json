@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "116933115183.dkr.ecr.us-east-2.amazonaws.com/carmen-web-app:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 80
+    }
+  ]
+}
