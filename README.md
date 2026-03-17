@@ -49,7 +49,7 @@ doppler login
 doppler setup
 \`\`\`
 
-### Doppler Secrets Screenshot
+### Doppler Secrets Image
 ![Doppler Secrets](docs/secrets.png)
 
 ## Migrations
@@ -59,5 +59,5 @@ Migrations are located in `backend/prisma/migrations/` and were applied using Pr
 npx prisma migrate dev --name init
 \`\`\`
 
-## Database Screenshot
+## Database Image
 ![Database](docs/databasei.png)
