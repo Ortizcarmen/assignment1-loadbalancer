@@ -154,20 +154,23 @@ curl -X POST https://assignment1-loadbalancer-production.up.railway.app/ \
   -d '{"query":"{ authors { name nationality books { title } } }"}'
 ```
 
-## Evidencia
+## Evidencias del funcionamiento
 
-### Endpoint funcionando
-![Endpoint](docs/endpoint.png)
+### Endpoint público en Railway
+Muestra que la API está desplegada y accesible públicamente.
+![Endpoint](graphql-api/docs/endpoint.png)
 
 ### Tablas en Supabase
-![Supabase](docs/supabase-tables.png)
+Se observan las tablas `Author` y `Book` con datos creados correctamente.
+![Supabase Tables](graphql-api/docs/supabase-tables.png)
 
 ### Query funcionando
-![Query](docs/query-result.png)
+Ejemplo de una consulta GraphQL ejecutada correctamente y devolviendo datos.
+![Query Result](graphql-api/docs/query-result.png)
 
-### Deploy en Railway
-![Railway](docs/railway-deploy.png)
-
+### Despliegue en Railway
+Servicio activo en Railway mostrando el estado en línea.
+![Railway Deploy](graphql-api/docs/railway-deploy.png)
 
 
 ## Conclusión
