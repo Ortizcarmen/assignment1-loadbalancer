@@ -1,6 +1,5 @@
 const { ApolloServer } = require('@apollo/server')
-const { expressMiddleware } = require('@apollo/server/express4')
-const express = require('express')
+const { startStandaloneServer } = require('@apollo/server/standalone')
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
@@ -49,17 +48,11 @@ const resolvers = {
 }
 
 async function startServer() {
-  const app = express()
   const server = new ApolloServer({ typeDefs, resolvers })
-  await server.start()
-
-  app.use(express.json())
-  app.use('/', expressMiddleware(server))
-
-  const PORT = process.env.PORT || 4000
-  app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en puerto ${PORT}`)
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: process.env.PORT || 4000 },
   })
+  console.log(`🚀 Servidor corriendo en ${url}`)
 }
 
 startServer()
