@@ -1,10 +1,11 @@
+const { ApolloServer } = require('@apollo/server')
+const { expressMiddleware } = require('@apollo/server/express4')
 const express = require('express')
-const { ApolloServer, gql } = require('apollo-server-express')
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-const typeDefs = gql`
+const typeDefs = `
   type Author {
     id: Int
     name: String
@@ -49,19 +50,15 @@ const resolvers = {
 
 async function startServer() {
   const app = express()
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    introspection: true,
-    playground: true,
-  })
-
+  const server = new ApolloServer({ typeDefs, resolvers })
   await server.start()
-  server.applyMiddleware({ app, path: '/' })
+
+  app.use(express.json())
+  app.use('/', expressMiddleware(server))
 
   const PORT = process.env.PORT || 4000
   app.listen(PORT, () => {
-    console.log(`🚀 GraphQL API corriendo en http://localhost:${PORT}/`)
+    console.log(`🚀 Servidor corriendo en puerto ${PORT}`)
   })
 }
 
