@@ -53,7 +53,11 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
-  playground: true,
+  playground: {
+    settings: {
+      'request.credentials': 'omit',
+    },
+  },
 })
 
 const PORT = process.env.PORT || 4000
