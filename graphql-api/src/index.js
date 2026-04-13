@@ -1,10 +1,9 @@
-const { ApolloServer, gql } = require('apollo-server')
+const express = require('express')
+const { ApolloServer, gql } = require('apollo-server-express')
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-// Aquí defines QUÉ tipos de datos existen y qué queries puedes hacer
-// Es como el "menú" de tu API
 const typeDefs = gql`
   type Author {
     id: Int
@@ -38,7 +37,6 @@ const typeDefs = gql`
   }
 `
 
-// Aquí defines CÓMO se obtienen los datos para cada query
 const resolvers = {
   Query: {
     authors: () => prisma.author.findMany({ include: { books: true } }),
@@ -49,19 +47,22 @@ const resolvers = {
   },
 }
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: true,
-  playground: {
-    settings: {
-      'request.credentials': 'omit',
-    },
-  },
-})
+async function startServer() {
+  const app = express()
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    introspection: true,
+    playground: true,
+  })
 
-const PORT = process.env.PORT || 4000
+  await server.start()
+  server.applyMiddleware({ app, path: '/' })
 
-server.listen({ port: PORT }).then(({ url }) => {
-  console.log(`🚀 GraphQL API corriendo en ${url}`)
-})
+  const PORT = process.env.PORT || 4000
+  app.listen(PORT, () => {
+    console.log(`🚀 GraphQL API corriendo en http://localhost:${PORT}/`)
+  })
+}
+
+startServer()
