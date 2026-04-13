@@ -5,7 +5,7 @@ Este proyecto implementa una API utilizando GraphQL con el objetivo de demostrar
 
 ## Tecnologías utilizadas
 - Node.js
-- Apollo Server
+- Graphql
 - Prisma ORM
 - PostgreSQL
 - Supabase (Base de datos en la nube)
@@ -193,7 +193,7 @@ curl -X POST https://assignment1-loadbalancer-production.up.railway.app/ \
 
 ### Endpoint público en Railway
 Muestra que la API está desplegada y accesible públicamente.
-![Endpoint](graphql-api/docs/endpoint.png)
+![Endpoint](graphql-api/docs/graphql.png)
 
 ### Tablas en Supabase
 Se observan las tablas `Author` y `Book` con datos creados correctamente.
