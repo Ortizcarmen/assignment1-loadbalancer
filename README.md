@@ -1,67 +1,98 @@
 # Assignment 07 — GraphQL API
 
-##  Descripción
+## Descripción
+Este proyecto implementa una API utilizando GraphQL con el objetivo de demostrar cómo se pueden generar endpoints dinámicos sin necesidad de ajustarlos a campos específicos, a diferencia de REST.
 
-Este proyecto implementa una API utilizando **GraphQL** con el objetivo de demostrar cómo se pueden generar endpoints dinámicos sin necesidad de ajustarlos a campos específicos, a diferencia de REST.
-
----
-
-##  Tecnologías utilizadas
-
+## Tecnologías utilizadas
 - Node.js
 - Apollo Server
 - Prisma ORM
 - PostgreSQL
 - Supabase (Base de datos en la nube)
 - Railway (Deploy del backend)
+
 ---
 
-
-
-##  Endpoint público
+## Endpoint público
+```
 https://assignment1-loadbalancer-production.up.railway.app/
-
+```
 Este endpoint permite realizar consultas GraphQL sin autenticación.
 
 ---
 
-##  ¿Cómo funciona GraphQL en este proyecto?
+## ¿Cómo funciona GraphQL en este proyecto?
+A diferencia de REST, GraphQL permite al cliente solicitar únicamente los campos que necesita. Un solo endpoint responde todas las consultas.
 
-A diferencia de REST, GraphQL permite al cliente solicitar únicamente los campos que necesita.
-
-Ejemplo:
-
+Ejemplo — solo títulos:
 ```graphql
 query {
   books {
     title
   }
 }
-
-##  Base de Datos
-Se utilizó Supabase como proveedor de base de datos PostgreSQL en la nube.
-
-Características:
-- Base de datos accesible desde internet
-- No requiere instalación local
-- Integración sencilla con Prisma
-
-Configuración:
-```env
-DATABASE_URL=postgresql://postgres:TU_PASSWORD@db.xxxxx.supabase.co:5432/postgres
 ```
 
-Uso en el proyecto:
-- Se definieron modelos en `schema.prisma`
-- Se ejecutaron migraciones para crear las tablas
-- Se insertaron datos de prueba utilizando seed
+Ejemplo — todos los campos:
+```graphql
+query {
+  books {
+    id
+    title
+    genre
+    publishedYear
+    pages
+    summary
+    available
+    author {
+      name
+      nationality
+    }
+  }
+}
+```
+
+---
+
+## Base de datos
+Se utilizó Supabase como proveedor de base de datos PostgreSQL en la nube. Se definieron modelos en `schema.prisma`, se ejecutaron migraciones para crear las tablas y se insertaron datos de prueba con seed.
+
+---
 
 ## Modelos disponibles
+
 ### Author (Autor)
 
-## Relación entre modelos
-- Un Author puede tener múltiples Books
-- Un Book pertenece a un Author
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| id | Int | Identificador único autoincremental |
+| name | String | Nombre completo del autor |
+| nationality | String | Nacionalidad del autor |
+| birthYear | Int | Año de nacimiento |
+| bio | String | Biografía corta (opcional) |
+| createdAt | String | Fecha de creación del registro |
+| books | [Book] | Lista de libros asociados al autor |
+
+### Book (Libro)
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| id | Int | Identificador único autoincremental |
+| title | String | Título del libro |
+| genre | String | Género literario |
+| publishedYear | Int | Año de publicación |
+| pages | Int | Número de páginas |
+| summary | String | Resumen del libro (opcional) |
+| available | Boolean | Disponibilidad del libro |
+| createdAt | String | Fecha de creación del registro |
+| author | Author | Autor relacionado |
+| authorId | Int | ID del autor (llave foránea) |
+
+### Relación entre modelos
+- Un `Author` puede tener múltiples `Books`
+- Un `Book` pertenece a un `Author`
+
+---
 
 ## Queries disponibles
 
@@ -138,6 +169,8 @@ query {
 }
 ```
 
+---
+
 ## Ejemplos de uso con curl
 
 ### Todos los libros
@@ -153,6 +186,8 @@ curl -X POST https://assignment1-loadbalancer-production.up.railway.app/ \
   -H 'content-type: application/json' \
   -d '{"query":"{ authors { name nationality books { title } } }"}'
 ```
+
+---
 
 ## Evidencias del funcionamiento
 
@@ -172,6 +207,7 @@ Ejemplo de una consulta GraphQL ejecutada correctamente y devolviendo datos.
 Servicio activo en Railway mostrando el estado en línea.
 ![Railway Deploy](graphql-api/docs/railway-deploy.png)
 
+---
 
 ## Conclusión
-GraphQL permite construir APIs más flexibles y eficientes, ya que el cliente puede decidir exactamente qué datos necesita, reduciendo el tráfico innecesario y mejorando el rendimiento.
+GraphQL permite construir APIs más flexibles y eficientes. El cliente decide exactamente qué datos necesita, reduciendo tráfico innecesario y mejorando el rendimiento.
