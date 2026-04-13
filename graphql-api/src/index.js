@@ -1,6 +1,7 @@
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
 const { PrismaClient } = require('@prisma/client')
+const express = require('express')
 
 const prisma = new PrismaClient()
 
@@ -48,11 +49,39 @@ const resolvers = {
 }
 
 async function startServer() {
+  const app = express()
+
   const server = new ApolloServer({ typeDefs, resolvers })
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: process.env.PORT || 4000 },
+  await server.start()
+
+  app.use(express.json())
+
+  app.get('/', (req, res) => {
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>GraphQL Playground</title>
+        <style>
+          body { margin: 0; padding: 0; height: 100vh; }
+          iframe { width: 100%; height: 100vh; border: none; }
+        </style>
+      </head>
+      <body>
+        <iframe src="https://studio.apollographql.com/sandbox/explorer?endpoint=https://assignment1-loadbalancer-production.up.railway.app/graphql"></iframe>
+      </body>
+      </html>
+    `)
   })
-  console.log(`🚀 Servidor corriendo en ${url}`)
+
+  app.use('/graphql', (req, res, next) => {
+    server.requestHandler(req, res)
+  })
+
+  const PORT = process.env.PORT || 4000
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor corriendo en puerto ${PORT}`)
+  })
 }
 
 startServer()
