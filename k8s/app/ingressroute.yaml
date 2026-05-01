@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mi-app
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`app.carmen-crisostomo.com`)
+      kind: Rule
+      services:
+        - name: mi-app
+          port: 80

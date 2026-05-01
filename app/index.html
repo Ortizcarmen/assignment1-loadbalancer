@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 08</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 3rem 4rem;
+      text-align: center;
+      max-width: 600px;
+    }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; letter-spacing: 1px; }
+    p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 0.5rem; }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50px;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      margin: 0.3rem;
+    }
+    .badges { margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Assignment 08</h1>
+    <p>Carmen Crisostomo</p>
+    <p>Kubernetes con Minikube</p>
+    <div class="badges">
+      <span class="badge">Minikube</span>
+      <span class="badge">Traefik</span>
+      <span class="badge">ArgoCD</span>
+      <span class="badge">Docker</span>
+    </div>
+  </div>
+</body>
+</html>
