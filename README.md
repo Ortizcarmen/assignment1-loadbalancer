@@ -33,6 +33,7 @@ Se editó el archivo /etc/hosts para resolver los dominios localmente:
 
 ## Comandos ejecutados
 
+```bash
 minikube start --driver=docker --cpus=2 --memory=4096
 kubectl create namespace traefik
 helm repo add traefik https://traefik.github.io/charts
@@ -50,3 +51,4 @@ echo "$(minikube ip) app.carmen-crisostomo.com" | sudo tee -a /etc/hosts
 echo "$(minikube ip) argo.carmen-crisostomo.com" | sudo tee -a /etc/hosts
 kubectl patch configmap argocd-cmd-params-cm -n argocd --type merge -p '{"data":{"server.insecure":"true"}}'
 kubectl rollout restart deployment/argocd-server -n argocd
+```
